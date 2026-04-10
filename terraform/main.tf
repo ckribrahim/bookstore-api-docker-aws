@@ -242,10 +242,12 @@ resource "aws_instance" "app_server" {
 
     echo "=== Starting application ==="
     export PATH=$PATH:/usr/local/bin
+    cp /home/ec2-user/app/.env /home/ec2-user/app/docker/.env
+    chmod 600 /home/ec2-user/app/docker/.env
     docker-compose -f /home/ec2-user/app/docker/docker-compose.yml up -d
 
     echo "=== Setup complete ==="
-  EOF
+    EOF
 
   tags = merge(local.common_tags, {
     Name = "${local.owner}-${local.project}-server"
