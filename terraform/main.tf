@@ -241,7 +241,8 @@ resource "aws_instance" "app_server" {
     chown ec2-user:ec2-user /home/ec2-user/app/.env
 
     echo "=== Starting application ==="
-    sudo -u ec2-user docker-compose -f /home/ec2-user/app/docker/docker-compose.yml up -d
+    export PATH=$PATH:/usr/local/bin
+    docker-compose -f /home/ec2-user/app/docker/docker-compose.yml up -d
 
     echo "=== Setup complete ==="
   EOF
