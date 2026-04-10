@@ -30,26 +30,36 @@ cursor = connection.cursor()
 # Create books table within sqlite db and populate with sample data
 # Execute the code below only once.
 def init_bookstore_db():
-    drop_table = 'DROP TABLE IF EXISTS bookstore_db.books;'
-    books_table = """
-    CREATE TABLE bookstore_db.books(
-    book_id INT NOT NULL AUTO_INCREMENT,
-    title VARCHAR(100) NOT NULL,
-    author VARCHAR(100),
-    is_sold BOOLEAN NOT NULL DEFAULT 0,
-    PRIMARY KEY (book_id)
-    )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-    """
-    data = """
-    INSERT INTO bookstore_db.books (title, author, is_sold)
-    VALUES
-        ("Where the Crawdads Sing", "Delia Owens", 1 ),
-        ("The Vanishing Half: A Novel", "Brit Bennett", 0),
-        ("1st Case", "James Patterson, Chris Tebbetts", 0);
-    """
-    cursor.execute(drop_table)
-    cursor.execute(books_table)
-    cursor.execute(data)
+    try:
+        # Tablo zaten varsa hiçbir şey yapma
+        cursor.execute("SHOW TABLES LIKE 'books';")
+        if cursor.fetchone():
+            print("Table 'books' already exists, skipping initialization.")
+            return
+
+        books_table = """
+        CREATE TABLE bookstore_db.books(
+        book_id INT NOT NULL AUTO_INCREMENT,
+        title VARCHAR(100) NOT NULL,
+        author VARCHAR(100),
+        is_sold BOOLEAN NOT NULL DEFAULT 0,
+        PRIMARY KEY (book_id)
+        )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+        """
+        data = """
+        INSERT INTO bookstore_db.books (title, author, is_sold)
+        VALUES
+            ("Where the Crawdads Sing", "Delia Owens", 1),
+            ("The Vanishing Half: A Novel", "Brit Bennett", 0),
+            ("1st Case", "James Patterson, Chris Tebbetts", 0);
+        """
+        cursor.execute(books_table)
+        cursor.execute(data)
+        print("Database initialized successfully.")
+
+    except Exception as e:
+        print(f"ERROR: Database initialization failed: {e}")
+        sys.exit(1)
 
 # Write a function named `get_all_books` which gets all books from the books table in the db,
 # and return result as list of dictionary
