@@ -125,10 +125,7 @@ resource "aws_instance" "app_server" {
     MYSQL_DATABASE=${var.db_name}
     MYSQL_USER=${var.db_user}
     MYSQL_PASSWORD=${var.db_password}
-    FLASK_ENV=production
-    SECRET_KEY=${var.flask_secret_key}
     ENVFILE
-
     chmod 600 .env
     chown ec2-user:ec2-user .env
 

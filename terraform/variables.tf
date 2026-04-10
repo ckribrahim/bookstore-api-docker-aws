@@ -24,7 +24,7 @@ variable "owner" {
 variable "instance_type" {
   description = "EC2 instance type"
   type        = string
-  default     = "t2.micro"
+  default     = "t3.micro"
 }
 
 variable "key_name" {
@@ -61,8 +61,3 @@ variable "db_password" {
   sensitive   = true
 }
 
-variable "flask_secret_key" {
-  description = "Flask SECRET_KEY for session signing (min 32 chars)"
-  type        = string
-  sensitive   = true
-}
