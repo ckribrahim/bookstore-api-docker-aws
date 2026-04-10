@@ -3,58 +3,37 @@
 # ============================================================
 .env
 *.env
-.env.*
 !.env.example
 
 # ============================================================
 # TERRAFORM
 # ============================================================
-.terraform/
-.terraform.lock.hcl
+**/.terraform/
+**/.terraform.lock.hcl
 *.tfstate
 *.tfstate.*
 *.tfstate.backup
 terraform.tfvars
-*.tfvars
-!*.tfvars.example
+!terraform.tfvars.example
 crash.log
 crash.*.log
-override.tf
-override.tf.json
-*_override.tf
-*_override.tf.json
 
 # ============================================================
 # PYTHON
 # ============================================================
 __pycache__/
 *.py[cod]
-*$py.class
-*.so
-.Python
-build/
-dist/
-*.egg-info/
-.eggs/
-*.egg
 .venv/
 venv/
-env/
+*.egg-info/
 .pytest_cache/
 .coverage
-htmlcov/
-
-# ============================================================
-# DOCKER
-# ============================================================
-*.log
 
 # ============================================================
 # IDE & OS
 # ============================================================
 .vscode/
 .idea/
-*.swp
-*.swo
 .DS_Store
 Thumbs.db
+*.log
