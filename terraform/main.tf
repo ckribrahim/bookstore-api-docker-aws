@@ -86,7 +86,7 @@ resource "aws_ssm_parameter" "db_name" {
 
 resource "aws_iam_role" "ec2_role" {
   name        = "${local.project}-ec2-role"
-  description = "EC2 role for ${local.project} — SSM read access only"
+  description = "EC2 role for ${local.project} SSM read access"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
